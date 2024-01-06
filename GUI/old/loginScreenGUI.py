@@ -65,7 +65,9 @@ incorrectMessage = "Employee ID does not exist!"
 employeIDIncorrectLabel = tk.Label(employeeIDFrame, text=incorrectMessage, anchor="w", fg="red", font=errorFont)
 employeeIDLabel.grid(row=0, column=0, sticky="nsew", pady=3, padx=10)
 employeeIDTextBox.grid(row=1, column=0, sticky="nsew", padx=10)
+
 employeIDIncorrectLabel.grid(row=2, column=0, sticky="nsew", padx=10)
+
 
 passwordIDFrame = tk.Frame(masterFrame)
 passwordIDFrame.rowconfigure((0, 1, 2), weight=1)
@@ -77,19 +79,9 @@ incorrectMessage = "Password is Incorrect!"
 passwordIDIncorrectLabel = tk.Label(passwordIDFrame, text=incorrectMessage, anchor="w", fg="red", font=errorFont)
 passwordIDLabel.grid(row=0, column=0, sticky="nsew", pady=3, padx=10)
 passwordIDTextBox.grid(row=1, column=0, sticky="nsew", padx=10)
+
 passwordIDIncorrectLabel.grid(row=2, column=0, sticky="w", padx=10)
 
-# remember me check mark
-checkBoxFrame = tk.Frame(masterFrame)
-checkBoxFrame.rowconfigure((0, 1), weight=1)
-checkBoxFrame.columnconfigure((0), weight=1)
-checkBoxFrame.grid(row=4, column=0, sticky="nsew", padx=10)
-checkBoxVar = tk.BooleanVar()
-checkBox = tk.Checkbutton(checkBoxFrame, text="Stay Logged In?", variable=checkBoxVar, font=errorFont)
-checkBox.grid(column=0, row=0, sticky="ew")
-"""troubleLoginMessage = "Trouble logging in? Contact your system administrator!"
-troubleLogin = tk.Label(checkBoxFrame, font=descriptionFont, anchor="center", text=troubleLoginMessage)
-troubleLogin.grid(row=1,column=0, sticky="nsew", pady=3)"""
 
 # button section
 buttonFrame = tk.Frame(masterFrame)
