@@ -97,12 +97,29 @@ class login_screen:
         self.window.mainloop()
 
 
+class adminstrator_screen:
+    def __init__(self) -> None:
+        pass
+
+    def run(self):
+        pass
+
+
+class reciptionist_screen:
+    def __init__(self) -> None:
+        pass
+
+    def run(self):
+        pass
+
+
 class doctor_screen:
     def __init__(self) -> None:
         pass
 
     def run(self):
         pass
+
 
 if __name__ == "__main__":
     login = login_screen()
