@@ -14,7 +14,7 @@ def hash(password: str, salt: str):
 
 
 if __name__ == "__main__":
-    password = "abc"
+    password = input("Enter the password: ")
     hashed_password = genrate_hash_and_salt(password)
     print("password:\t\t", password, "\nsalt:\t\t\t", hashed_password[0], "\nhash:\t\t\t", hashed_password[1])
     print("test hash function:\t", hash(password, hashed_password[0]))
