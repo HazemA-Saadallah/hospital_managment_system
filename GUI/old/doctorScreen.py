@@ -6,7 +6,8 @@ from commonFunctions import *
 
 root = tk.Tk()
 root.title("Doctor Screen")
-root.wm_state("zoomed")
+""" root.wm_state("zoomed") """
+root.wm_state("normal")
 root.columnconfigure((0),weight=1)
 root.rowconfigure((0),weight=1)
 masterFrame = tk.Frame(root)

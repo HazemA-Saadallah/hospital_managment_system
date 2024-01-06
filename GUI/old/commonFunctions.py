@@ -1,15 +1,17 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-def loadImage(pathToImage,sizeX,sizeY):
+
+def loadImage(pathToImage, sizeX, sizeY):
     try:
         imageBitmap = Image.open(pathToImage)
     except:
         print("ERROR: Bad image string")
         return
-    imageBitmapResized = imageBitmap.resize((sizeX,sizeY), Image.ANTIALIAS)
+    imageBitmapResized = imageBitmap.resize((sizeX, sizeY), Image.ANTIALIAS)
     finalImage = ImageTk.PhotoImage(imageBitmapResized)
     return finalImage
+
 
 def createFrame(parent, rows, columns):
     returnFrame = tk.Frame(parent)
