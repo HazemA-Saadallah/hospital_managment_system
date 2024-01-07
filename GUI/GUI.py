@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import random
 
+
 class login_screen:
     def __init__(self) -> None:
         self.window = tkinter.Tk()
@@ -159,11 +160,10 @@ class reciptionist_screen:
             tempButton = tkinter.Button(tableFrame, text=buttonNames[i], font=("Meiryo UI", 18), bg="#1ebbd7", anchor="center")
             tempButton.grid(column=i, row=2, sticky="nsew", padx=15, pady=10)
 
-    def run(self, is_admin=False):
+    def run(self):
         self.init_user_data_section()
         self.init_table()
-        if is_admin: return self.masterframe
-        else: self.window.mainloop()
+        self.window.mainloop()
 
 
 class doctor_screen:
@@ -234,14 +234,11 @@ class doctor_screen:
             tempButton.grid(column=i, row=2, sticky="nsew", padx=15, pady=10)
 
     def table_inser_dumy_data(self):
-        sources = ["Hospital", "Reception", "Transfer", "Hospital Transfer"]
         firstNames = ["John", "Tom", "Jones", "Mohamed", "Cliff", "Arriana", "Melissa"]
         lastNames = ["Thomas", "Sombol", "Hambola", "Mohsen", "Alshishi", "AlFerdesy", "Dynamite"]
-        date = "XX/YY/ZZ"
         for i in range(50):
             firstName = random.choice(firstNames)
             lastName = random.choice(lastNames)
-            reason = random.choice(sources)
             fullName = firstName + " " + lastName
             record = firstName.lower() + "_" + lastName.lower() + ".xlsx"
             data = (i, fullName, "XX/YY/ZZ XX:YY PM", record)
@@ -289,11 +286,10 @@ class financial_screen:
             cashFlowButton = tkinter.Label(master=cashFlowsFrame, text=cashFlows[i], anchor="center", font=("Meiryo UI", 24, "bold"))
             cashFlowButton.grid(column=i, row=0, sticky="ew", padx=15)
 
-    def run(self, is_admin=False):
+    def run(self):
         self.createFinancial()
         self.window.mainloop()
-        if is_admin: return self.masterframe
-        else: self.window.mainloop()
+        self.window.mainloop()
 
 
 class adminstrator_screen:
@@ -496,14 +492,11 @@ class adminstrator_screen:
                 tempButton = tkinter.Button(self.tableFrame, text=buttonNames[i], font=("meiryo ui", 18), bg="#1ebbd7", anchor="center")
                 tempButton.grid(column=i, row=2, sticky="nsew", padx=15, pady=10)
 
-            sources = ["Hospital", "Reception", "Transfer", "Hospital Transfer"]
             firstNames = ["John", "Tom", "Jones", "Mohamed", "Cliff", "Arriana", "Melissa"]
             lastNames = ["Thomas", "Sombol", "Hambola", "Mohsen", "Alshishi", "AlFerdesy", "Dynamite"]
-            date = "XX/YY/ZZ"
             for i in range(50):
                 firstName = random.choice(firstNames)
                 lastName = random.choice(lastNames)
-                reason = random.choice(sources)
                 fullName = firstName + " " + lastName
                 record = firstName.lower() + "_" + lastName.lower() + ".xlsx"
                 data = (i, fullName, "XX/YY/ZZ XX:YY PM", record)
@@ -559,59 +552,23 @@ class adminstrator_screen:
                 obj.destroy()
             self.USERS_MANAGEMENT_STATE = False
 
-    """ def goToUserManagment(self): """
-    """     self.destorer("HOME") """
-    """     self.destorer("FINANCIAL") """
-    """     self.destorer("RECIPTIONIST") """
-    """     self.User_management() """
-    """"""
-    """ def goToReciptionist(self): """
-    """     self.destorer("HOME") """
-    """     self.destorer("FINANCIAL") """
-    """     self.destorer("USERS_MANAGEMENT") """
-    """     self.create_reciptionist() """
-    """"""
-    """ def goToFinancial(self): """
-    """     self.destorer("HOME") """
-    """     self.destorer("RECIPTIONIST") """
-    """     self.destorer("USERS_MANAGEMENT") """
-    """     self.create_financial() """
-    """"""
-    """ def goToHome(self): """
-    """     self.destorer("RECIPTIONIST") """
-    """     self.destorer("FINANCIAL") """
-    """     self.destorer("USERS_MANAGEMENT") """
-    """     self.createHome() """
-    """"""
-    """ def destorer(self, obj_type: str): """
-    """     obj_type = obj_type.upper() """
-    """     obj_state = getattr(self, obj_type+"_STATE") """
-    """     obj_var = getattr(self, obj_type+"_VAR") """
-    """     if (obj_state): """
-    """         for obj in obj_var: """
-    """             obj.destroy() """
-    """         obj_state = False """
-    """"""
-    """     print(f"HOME_STATE: {self.HOME_STATE} --> {len(self.HOME_VAR)}\nFINANCIAL_STATE{self.FINANCIAL_STATE} --> {len(self.FINANCIAL_VAR)}\n\ """
-    """             USERS_MANAGEMENT_STATE{self.USERS_MANAGEMENT_STATE} --> {len(self.USERS_MANAGEMENT_VAR)}\nRECIPTIONIST_STATE{self.RECIPTIONIST_STATE} --> {len(self.RECIPTIONIST_VAR)}\n") """
-
     def run(self):
         self.createHome()
         self.window.mainloop()
 
 
 if __name__ == "__main__":
-    """ login = login_screen() """
-    """ login.run() """
+    login = login_screen()
+    login.run()
 
-    """ reciptionist = reciptionist_screen() """
-    """ reciptionist.run() """
+    reciptionist = reciptionist_screen()
+    reciptionist.run()
 
-    """ doctor = doctor_screen() """
-    """ doctor.run() """
+    doctor = doctor_screen()
+    doctor.run()
 
-    """ finance = financial_screen() """
-    """ finance.run() """
+    finance = financial_screen()
+    finance.run()
 
     admin = adminstrator_screen()
     admin.run()
