@@ -4,7 +4,6 @@ from commonFunctions import tk, loadImage
 
 root = tk.Tk()
 root.title("Admin Screen")
-""" root.wm_state("zoomed") """
 root.wm_state("normal")
 root.columnconfigure((0), weight=1)
 root.rowconfigure((0), weight=1)
