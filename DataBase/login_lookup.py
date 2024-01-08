@@ -23,6 +23,15 @@ def lookup_password(user_id: str, password: str):
     return fetched_data[1] == hash.hash(password, fetched_data[0])
 
 
+def run(login_name: str, password: str):
+    id = lookup_login_name(login_name)
+    if id:
+        verification = lookup_password(id, password)
+        if verification: return True
+        else: return
+
+
+
 if __name__ == "__main__":
     print("lookup user200: ", lookup_login_name("user200"))
     admin_id = lookup_login_name("admin")[0]

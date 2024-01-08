@@ -11,7 +11,7 @@ connection_cursor.execute("""CREATE TABLE IF NOT EXISTS test_table (a bytea, b i
 """ connection_cursor.execute('''UPDATE test_table SET a = %s''', (bin_data + b'1',)) """
 
 connection_cursor.execute("SELECT a FROM test_table WHERE b = %s", (1337,)) 
-data = connection_cursor.fetchone()[0] 
+data = connection_cursor.fetchone()[0]
 
 with open('./new.out', 'wb') as f: 
     f.write(data) 

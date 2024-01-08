@@ -3,6 +3,14 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import random
 
+import importlib.util
+import sys
+
+spec = importlib.util.spec_from_file_location("login_lookup", "DataBase/login_lookup.py")
+login_lookup = importlib.util.module_from_spec(spec)
+sys.modules["login_lookup"] = login_lookup
+spec.loader.exec_module(login_lookup)
+
 
 class login_screen:
     def __init__(self) -> None:
@@ -13,7 +21,7 @@ class login_screen:
         self.masterframe.rowconfigure((0, 1, 2, 3, 4, 5), weight=1)
         self.masterframe.columnconfigure((0), weight=1)
         self.masterframe.grid(column=0, row=0, sticky="ew")
-        self.logo = Image.open("./assets/hospitalLogo.png")
+        self.logo = Image.open("GUI/assets/hospitalLogo.png")
 
     def init_logo(self):
         self.logo_frame = tkinter.Frame(self.masterframe)
@@ -68,7 +76,7 @@ class login_screen:
         self.buttonFrame.rowconfigure((0), weight=1)
         self.buttonFrame.columnconfigure((0), weight=1)
         self.buttonFrame.grid(row=5, column=0, sticky="nsew")
-        self.loginButton = tkinter.Button(self.buttonFrame, text="Log In", fg="White", bg="Blue", font=("Meiryo UI", 14, "bold"), anchor="center", command=lambda: self.flag_login_error('username'))
+        self.loginButton = tkinter.Button(self.buttonFrame, text="Log In", fg="White", bg="Blue", font=("Meiryo UI", 14, "bold"), anchor="center")
         self.loginButton.grid(column=0, row=0, pady=10, sticky="nsew", padx=10)
 
     def flag_login_error(self, error_code):
@@ -76,9 +84,9 @@ class login_screen:
             self.wrong_username_label.grid(row=2, column=0, sticky="nsew", padx=10)
         elif error_code == 'password':
             self.wrong_password_label.grid(row=2, column=0, sticky="w", padx=10)
-        elif error_code == 'both':
-            self.wrong_username_label.grid(row=2, column=0, sticky="nsew", padx=10)
-            self.wrong_password_label.grid(row=2, column=0, sticky="w", padx=10)
+        """ elif error_code == 'both': """
+        """     self.wrong_username_label.grid(row=2, column=0, sticky="nsew", padx=10) """
+        """     self.wrong_password_label.grid(row=2, column=0, sticky="w", padx=10) """
 
     def run(self):
         self.init_logo()
@@ -100,8 +108,8 @@ class reciptionist_screen:
         self.masterframe.rowconfigure((0, 1, 2), weight=1)
         self.masterframe.columnconfigure((0), weight=1)
         self.masterframe.grid(column=0, row=0, sticky="nsew")
-        self.profilePictureImage = Image.open("./assets/noPersonBorderless.png")
-        self.logoutImage = Image.open("./assets/logout.png")
+        self.profilePictureImage = Image.open("GUI/assets/noPersonBorderless.png")
+        self.logoutImage = Image.open("GUI/assets/logout.png")
 
     def init_user_data_section(self):
         self.profilePictureImage = self.profilePictureImage.resize((180, 180), Image.Resampling.LANCZOS)
@@ -172,8 +180,8 @@ class doctor_screen:
         self.masterframe.rowconfigure((0, 1, 2), weight=1)
         self.masterframe.columnconfigure((0), weight=1)
         self.masterframe.grid(column=0, row=0, sticky="nsew")
-        self.profilePictureImage = Image.open("./assets/noPersonBorderless.png")
-        self.logoutImage = Image.open("./assets/logout.png")
+        self.profilePictureImage = Image.open("GUI/assets/noPersonBorderless.png")
+        self.logoutImage = Image.open("GUI/assets/logout.png")
 
     def init_user_data_section(self):
         self.profilePictureImage = self.profilePictureImage.resize((180, 180), Image.Resampling.LANCZOS)
@@ -326,7 +334,7 @@ class adminstrator_screen:
             self.home_frame.columnconfigure((0), weight=1)
             self.home_frame.grid(row=0, column=0, sticky="nsew")
 
-            self.profilePictureImage = Image.open("./assets/noPersonBorderless.png")
+            self.profilePictureImage = Image.open("GUI/assets/noPersonBorderless.png")
             self.profilePictureImage = self.profilePictureImage.resize((280, 280), Image.Resampling.LANCZOS)
             self.profilePictureImage = ImageTk.PhotoImage(self.profilePictureImage)
             pictureLabel = tkinter.Label(master=self.home_frame, image=self.profilePictureImage, anchor="s")
