@@ -145,7 +145,6 @@ def createHospitalSection():
         HOSPITAL_VAR.append(hospitalFrame)
         HOSPITAL_STATE = True
 
-
 def destroyHospital():
     global HOSPITAL_STATE
     global HOSPITAL_VAR
