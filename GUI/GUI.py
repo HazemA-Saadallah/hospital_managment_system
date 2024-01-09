@@ -23,6 +23,12 @@ class login_screen:
         self.masterframe.grid(column=0, row=0, sticky="ew")
         self.logo = Image.open("GUI/assets/hospitalLogo.png")
 
+        self.init_logo()
+        self.init_login_massage()
+        self.init_username_section()
+        self.init_password_section()
+        self.init_button_section()
+
     def init_logo(self):
         self.logo_frame = tkinter.Frame(self.masterframe)
         self.logo_frame.grid(row=0, column=0, sticky="ew", pady=10)
@@ -84,21 +90,22 @@ class login_screen:
             self.wrong_username_label.grid(row=2, column=0, sticky="nsew", padx=10)
         elif error_code == 'password':
             self.wrong_password_label.grid(row=2, column=0, sticky="w", padx=10)
+        elif error_code == 'kill_username':
+            self.wrong_username_label.grid_forget()
+        elif error_code == 'kill_password':
+            self.wrong_password_label.grid_forget()
+
         """ elif error_code == 'both': """
         """     self.wrong_username_label.grid(row=2, column=0, sticky="nsew", padx=10) """
         """     self.wrong_password_label.grid(row=2, column=0, sticky="w", padx=10) """
 
     def run(self):
-        self.init_logo()
-        self.init_login_massage()
-        self.init_username_section()
-        self.init_password_section()
-        self.init_button_section()
         self.window.mainloop()
 
 
 class reciptionist_screen:
-    def __init__(self) -> None:
+    def __init__(self, username: str) -> None:
+        self.username = username
         self.window = tkinter.Tk()
         self.window.title("Receptionist Screen")
         self.window.wm_state("normal")
@@ -111,6 +118,9 @@ class reciptionist_screen:
         self.profilePictureImage = Image.open("GUI/assets/noPersonBorderless.png")
         self.logoutImage = Image.open("GUI/assets/logout.png")
 
+        self.init_user_data_section()
+        self.init_table()
+
     def init_user_data_section(self):
         self.profilePictureImage = self.profilePictureImage.resize((180, 180), Image.Resampling.LANCZOS)
         self.profilePictureImage = ImageTk.PhotoImage(self.profilePictureImage)
@@ -118,7 +128,7 @@ class reciptionist_screen:
         user_data_section.grid(column=0, row=0, sticky="nsew")
         user_data_section.columnconfigure((0, 1, 2), weight=1)
         user_data_section.rowconfigure((0, 1), weight=1)
-        welcomeMessage = "Welcome Sara Mohamed Elbassiouny!"
+        welcomeMessage = "Welcome " + self.username
         patientsMessage = "There are currently XYZ appointments"
         welcomeLabel = tkinter.Label(user_data_section, text=welcomeMessage, font=("Meiryo UI", 36, "bold"), anchor="sw")
         patientsLabel = tkinter.Label(user_data_section, text=patientsMessage, font=("Meiryo UI", 18), anchor="nw")
@@ -164,13 +174,12 @@ class reciptionist_screen:
             tempButton.grid(column=i, row=2, sticky="nsew", padx=15, pady=10)
 
     def run(self):
-        self.init_user_data_section()
-        self.init_table()
         self.window.mainloop()
 
 
 class doctor_screen:
-    def __init__(self) -> None:
+    def __init__(self, username: str) -> None:
+        self.username = username
         self.window = tkinter.Tk()
         self.window.title("Doctor Screen")
         self.window.wm_state("normal")
@@ -183,6 +192,10 @@ class doctor_screen:
         self.profilePictureImage = Image.open("GUI/assets/noPersonBorderless.png")
         self.logoutImage = Image.open("GUI/assets/logout.png")
 
+        self.init_user_data_section()
+        self.init_table()
+        self.table_inser_dumy_data()
+
     def init_user_data_section(self):
         self.profilePictureImage = self.profilePictureImage.resize((180, 180), Image.Resampling.LANCZOS)
         self.profilePictureImage = ImageTk.PhotoImage(self.profilePictureImage)
@@ -190,7 +203,7 @@ class doctor_screen:
         user_data_frame.grid(column=0, row=0, sticky="nsew")
         user_data_frame.columnconfigure((0, 1, 2), weight=1)
         user_data_frame.rowconfigure((0, 1), weight=1)
-        welcomeMessage = "Welcome Dr. Bassem Mohamed Elsaadany!"
+        welcomeMessage = "Welcome Dr. " + self.username
         patientsMessage = "You have a total of 19 patients for today."
         welcomeLabel = tkinter.Label(user_data_frame, text=welcomeMessage, font=("Meiryo UI", 36, "bold"), anchor="sw")
         patientsLabel = tkinter.Label(user_data_frame, text=patientsMessage, font=("Meiryo UI", 36, "bold"), anchor="nw")
@@ -248,14 +261,12 @@ class doctor_screen:
             self.table.insert(parent="", index=tkinter.END, values=data)
 
     def run(self):
-        self.init_user_data_section()
-        self.init_table()
-        self.table_inser_dumy_data()
         self.window.mainloop()
 
 
 class financial_screen:
-    def __init__(self) -> None:
+    def __init__(self, username: str) -> None:
+        self.username = username
         self.window = tkinter.Tk()
         self.window.title("Admin Screen")
         self.window.wm_state("normal")
@@ -265,6 +276,8 @@ class financial_screen:
         self.masterframe.rowconfigure((0), weight=1)
         self.masterframe.columnconfigure((0), weight=1)
         self.masterframe.grid(column=0, row=0, sticky="nsew")
+
+        self.createFinancial()
 
     def createFinancial(self):
         financialFrame = tkinter.Frame(master=self.masterframe)
@@ -290,13 +303,12 @@ class financial_screen:
             cashFlowButton.grid(column=i, row=0, sticky="ew", padx=15)
 
     def run(self):
-        self.createFinancial()
-        self.window.mainloop()
         self.window.mainloop()
 
 
 class adminstrator_screen:
-    def __init__(self) -> None:
+    def __init__(self, username: str) -> None:
+        self.username = username
         self.HOME_STATE = False
         self.HOME_VAR = []
         self.FINANCIAL_STATE = False
@@ -327,6 +339,8 @@ class adminstrator_screen:
         self.modeMenu.add_separator()
         self.modeMenu.add_command(label="Users Management", command=self.goToUserManagment)
 
+        self.createHome()
+
     def createHome(self):
         if not self.HOME_STATE:
             self.home_frame = tkinter.Frame(master=self.masterframe)
@@ -338,7 +352,7 @@ class adminstrator_screen:
             self.profilePictureImage = self.profilePictureImage.resize((280, 280), Image.Resampling.LANCZOS)
             self.profilePictureImage = ImageTk.PhotoImage(self.profilePictureImage)
             pictureLabel = tkinter.Label(master=self.home_frame, image=self.profilePictureImage, anchor="s")
-            welcomeMessage = "Welcome Mahmoud Hussein Elsaadawy!"
+            welcomeMessage = "Welcome " + self.username
             subWelcomeMessage = "Please select a mode to continue from the system menu"
             textLabel = tkinter.Label(master=self.home_frame, text=welcomeMessage, anchor="n", font=("Meiryo UI", 40, "bold"))
             subTextLabel = tkinter.Label(master=self.home_frame, text=subWelcomeMessage, anchor="n", font=("Meiryo UI", 18))
@@ -359,11 +373,11 @@ class adminstrator_screen:
             user_data_section.grid(column=0, row=0, sticky="nsew")
             user_data_section.columnconfigure((0, 1, 2), weight=1)
             user_data_section.rowconfigure((0, 1), weight=1)
-            welcomeMessage = "Welcome Sara Mohamed Elbassiouny!"
+            welcomeMessage = "Welcome "+self.username
             patientsMessage = "There are currently XYZ appointments"
             welcomeLabel = tkinter.Label(user_data_section, text=welcomeMessage, font=("Meiryo UI", 36, "bold"), anchor="sw")
             patientsLabel = tkinter.Label(user_data_section, text=patientsMessage, font=("Meiryo UI", 18), anchor="nw")
-            self.profilePictureImage = Image.open("./assets/noPersonBorderless.png")
+            self.profilePictureImage = Image.open("GUI/assets/noPersonBorderless.png")
             self.profilePictureImage = self.profilePictureImage.resize((280, 280), Image.Resampling.LANCZOS)
             self.profilePictureImage = ImageTk.PhotoImage(self.profilePictureImage)
             pictureLabel = tkinter.Label(user_data_section, image=self.profilePictureImage)
@@ -375,7 +389,7 @@ class adminstrator_screen:
             logoutFrame.rowconfigure((0, 1), weight=1)
             logoutFrame.columnconfigure((0), weight=1)
             logoutFrame.grid(column=2, row=0, sticky="ew", columnspan=1)
-            self.logoutImage = Image.open("./assets/logout.png")
+            self.logoutImage = Image.open("GUI/assets/logout.png")
             self.logoutImage = self.logoutImage.resize((50, 50), Image.Resampling.LANCZOS)
             self.logoutImage = ImageTk.PhotoImage(self.logoutImage)
             logoutImageButton = tkinter.Button(logoutFrame, image=self.logoutImage, anchor="e")
@@ -442,14 +456,14 @@ class adminstrator_screen:
             self.user_management_frame.columnconfigure((0), weight=1)
             self.user_management_frame.grid(column=0, row=0, sticky="nsew")
 
-            self.profilePictureImage = Image.open("./assets/noPersonBorderless.png")
+            self.profilePictureImage = Image.open("GUI/assets/noPersonBorderless.png")
             self.profilePictureImage = self.profilePictureImage.resize((180, 180), Image.Resampling.LANCZOS)
             self.profilePictureImage = ImageTk.PhotoImage(self.profilePictureImage)
             user_data_frame = tkinter.Frame(self.user_management_frame)
             user_data_frame.grid(column=0, row=0, sticky="nsew")
             user_data_frame.columnconfigure((0, 1, 2), weight=1)
             user_data_frame.rowconfigure((0, 1), weight=1)
-            welcomeMessage = "Welcome Dr. Bassem Mohamed Elsaadany!"
+            welcomeMessage = "Welcome " + self.username
             patientsMessage = "You have a total of 19 patients for today."
             welcomeLabel = tkinter.Label(user_data_frame, text=welcomeMessage, font=("Meiryo UI", 36, "bold"), anchor="sw")
             patientsLabel = tkinter.Label(user_data_frame, text=patientsMessage, font=("Meiryo UI", 36, "bold"), anchor="nw")
@@ -458,7 +472,7 @@ class adminstrator_screen:
             patientsLabel.grid(column=1, row=1, padx=20, sticky="nsew")
             pictureLabel.grid(column=0, row=0, rowspan=2, padx=20, sticky="nsew")
 
-            self.logoutImage = Image.open("./assets/logout.png")
+            self.logoutImage = Image.open("GUI/assets/logout.png")
             self.logoutImage = self.logoutImage.resize((50, 50), Image.Resampling.LANCZOS)
             self.logoutImage = ImageTk.PhotoImage(self.logoutImage)
             logoutFrame = tkinter.Frame(user_data_frame)
@@ -556,16 +570,15 @@ class adminstrator_screen:
             self.USERS_MANAGEMENT_STATE = False
 
     def run(self):
-        self.createHome()
         self.window.mainloop()
 
 
 if __name__ == "__main__":
-    login = login_screen()
-    login.run()
+    """ login = login_screen() """
+    """ login.run() """
 
-    """ reciptionist = reciptionist_screen() """
-    """ reciptionist.run() """
+    reciptionist = reciptionist_screen("user")
+    reciptionist.run()
     """"""
     """ doctor = doctor_screen() """
     """ doctor.run() """

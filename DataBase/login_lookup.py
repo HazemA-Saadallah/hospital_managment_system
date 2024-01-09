@@ -23,12 +23,12 @@ def lookup_password(user_id: str, password: str):
     return fetched_data[1] == hash.hash(password, fetched_data[0])
 
 
-def run(login_name: str, password: str):
-    id = lookup_login_name(login_name)
-    if id:
-        verification = lookup_password(id, password)
-        if verification: return True
-        else: return
+""" def run(login_name: str, password: str): """
+"""     id = lookup_login_name(login_name) """
+"""     if id: """
+"""         verification = lookup_password(id, password) """
+"""         if verification: return True """
+"""         else: return """
 
 
 
@@ -38,3 +38,4 @@ if __name__ == "__main__":
     print("lookup admin: ", admin_id)
     print("lookup admin with 123: ", lookup_password(admin_id, '123'))
     print("lookup admin with admin: ", lookup_password(admin_id, 'admin'))
+    print("lookup admin with None value: ", lookup_password(admin_id, str(None)))

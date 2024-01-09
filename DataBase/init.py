@@ -107,7 +107,7 @@ class DB_builder:
         for i in range(number_of_users - 1):
             password_couple = hash.genrate_hash_and_salt("abc")
             random_choice = user_types[random.randint(0, 2)]
-            if random_choice == 'administrator':
+            if random_choice == 'administrator' or random_choice == 'reciptionist':
                 self.connection_cursor.execute('''INSERT INTO user_table (password_salt, password_hash, user_name, user_type) VALUES (%s, %s, %s, %s)''',
                                               (password_couple[0], password_couple[1], f"mr.user{i}", random_choice))
             else:
