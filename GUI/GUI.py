@@ -598,11 +598,11 @@ if __name__ == "__main__":
     """ login = login_screen() """
     """ login.run() """
 
-    reciptionist = reciptionist_screen("user")
-    reciptionist.run()
+    """ reciptionist = reciptionist_screen("user") """
+    """ reciptionist.run() """
     """"""
-    """ doctor = doctor_screen() """
-    """ doctor.run() """
+    doctor = doctor_screen("aa")
+    doctor.run()
     """"""
     """ finance = financial_screen() """
     """ finance.run() """

@@ -63,12 +63,12 @@ class doctor_screen:
         self.tableFrame.grid(column=0, row=1, sticky="nsew")
         self.tableFrame.rowconfigure((0, 1, 2), weight=1)
         self.tableFrame.columnconfigure((0, 1, 2, 3, 4), weight=1)
-        patientTitle = tkinter.Label(self.tableFrame, text="Patients List", font=("Meiryo UI", 36, "bold"), anchor="n")
-        patientTitle.grid(row=0, column=0, padx=20, sticky="n", columnspan=5)
+        self.patientTitle = tkinter.Label(self.tableFrame, text="Patients List", font=("Meiryo UI", 36, "bold"), anchor="n")
+        self.patientTitle.grid(row=0, column=0, padx=20, sticky="n", columnspan=5)
 
-        ttkStyle = ttk.Style()
-        ttkStyle.configure("Treeview", font=("Lucidia Sans", 15), rowheight=50)
-        ttkStyle.configure("Treeview.Heading", font=("Lucidia Sans", 17, "bold"))
+        self.ttkStyle = ttk.Style()
+        self.ttkStyle.configure("Treeview", font=("Lucidia Sans", 15), rowheight=50)
+        self.ttkStyle.configure("Treeview.Heading", font=("Lucidia Sans", 17, "bold"))
         self.table = ttk.Treeview(self.tableFrame, columns=('id', 'name', 'date', 'record'), show="headings", height=10)
         self.table.heading(('id'), text="Patient ID")
         self.table.heading(('name'), text="Full Name")
@@ -97,3 +97,8 @@ class doctor_screen:
 
     def run(self):
         self.window.mainloop()
+
+
+if __name__ == "__main__":
+    doctor = doctor_screen("dddd")
+    doctor.run()

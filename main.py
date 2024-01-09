@@ -59,19 +59,23 @@ def verify_login_credientials(LGO: login_screen_gui.login_screen):
     user_data = main_connection_cursor.fetchone()
 
 
-
 if __name__ == "__main__":
     login_screen_object = login_screen_gui.login_screen()
     login_screen_object.loginButton.configure(command=lambda: verify_login_credientials(login_screen_object))
     login_screen_object.run()
     print(user_data)
     if user_data[4] == 'reciptionist':
-        user_screen = reciptionist_screen_gui.reciptionist_screen(user_data[3])
+        main_connection_cursor.execute("""SELECT appointment_database.patient_name, user_table.user_name, user_table.specialization, appointment_database.record_time FROM appointment_database join user_table ON appointment_database.doctor_id = user_table.user_id WHERE appointment_date_time < CURRENT_DATE""")
+
+        fetchall = main_connection_cursor.fetchall()
+        """ for i in fetchall: """
+        """     print(i) """
+
+        user_screen = reciptionist_screen_gui.reciptionist_screen(user_data[3], fetchall)
         user_screen.run()
         # main_connection_cursor.execute("""SELECT * FROM user_table WHERE user_id = %s""", (user_id,))
     elif user_data[4] == 'administrator':
         user_screen = administrator_screen_gui.adminstrator_screen(user_data[3])
-        user_screen.run()
         user_screen.run()
     elif user_data[4] == 'doctor':
         user_screen = doctor_screen_gui.doctor_screen(user_data[3])

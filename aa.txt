@@ -1,0 +1,1 @@
+SELECT appointment_database.patient_name, user_table.user_name FROM appointment_database join user_table ON appointment_database.doctor_id = user_table.user_id WHERE appointment_date_time < CURRENT_DATE;
